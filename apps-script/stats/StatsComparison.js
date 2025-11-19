@@ -1,6 +1,6 @@
 // ===== PLAYER COMPARISON TOOL =====
 // Purpose: Provides player comparison dialog with optimized data retrieval
-// Dependencies: LeagueConfig.js
+// Dependencies: StatsConfig.js
 // Entry Point(s): getPlayerStats
 
 /**

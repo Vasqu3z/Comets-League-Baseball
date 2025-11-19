@@ -1,4 +1,4 @@
-// ===== LEAGUE HUB - CORE SCRIPT =====
+// ===== STATS - CORE SCRIPT =====
 // Core functionality: Menu and Update All orchestrator
 
 // ===== MENU =====

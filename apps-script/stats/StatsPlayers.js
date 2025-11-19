@@ -1,6 +1,6 @@
-// ===== PLAYER STATISTICS MODULE =====
+// ===== PLAYER STATS MODULE =====
 // Purpose: Updates player statistics from cached game data
-// Dependencies: LeagueConfig.js
+// Dependencies: StatsConfig.js
 // Entry Point(s): updateAllPlayerStatsFromCache
 
 /**

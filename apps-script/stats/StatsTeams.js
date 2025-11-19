@@ -1,6 +1,6 @@
-// ===== TEAM STATISTICS MODULE =====
+// ===== TEAM STATS MODULE =====
 // Purpose: Updates team statistics from cached game data
-// Dependencies: LeagueConfig.js
+// Dependencies: StatsConfig.js
 // Entry Point(s): updateAllTeamStatsFromCache
 
 /**

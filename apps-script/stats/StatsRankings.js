@@ -1,4 +1,4 @@
-// ===== LEAGUE HUB MODULE =====
+// ===== RANKINGS MODULE =====
 // Step 3: Update standings
 
 // ===== Update from cached data (called by updateAll) =====
