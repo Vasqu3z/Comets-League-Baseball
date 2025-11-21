@@ -1,0 +1,122 @@
+"use client";
+
+import React from "react";
+import RetroTable from "@/components/ui/RetroTable";
+import { cn } from "@/lib/utils";
+
+// Mock Data Interface
+interface TeamStanding {
+  id: string;
+  rank: number;
+  teamName: string;
+  teamCode: string;
+  wins: number;
+  losses: number;
+  pct: string;
+  gb: string;
+  streak: string;
+  runDiff: number;
+  logoColor: string;
+}
+
+// Mock Data - Replace with real fetch
+const MOCK_STANDINGS: TeamStanding[] = [
+  { id: 'fireballs', rank: 1, teamName: 'Mario Fireballs', teamCode: 'MAR', wins: 12, losses: 2, pct: '.857', gb: '-', streak: 'W5', runDiff: 45, logoColor: '#FF4D4D' },
+  { id: 'monsters', rank: 2, teamName: 'Bowser Monsters', teamCode: 'BOW', wins: 10, losses: 4, pct: '.714', gb: '2.0', streak: 'W2', runDiff: 28, logoColor: '#F4D03F' },
+  { id: 'monarchs', rank: 3, teamName: 'Peach Monarchs', teamCode: 'PCH', wins: 8, losses: 6, pct: '.571', gb: '4.0', streak: 'L1', runDiff: 5, logoColor: '#FF69B4' },
+  { id: 'wilds', rank: 4, teamName: 'DK Wilds', teamCode: 'DKW', wins: 7, losses: 7, pct: '.500', gb: '5.0', streak: 'L3', runDiff: -2, logoColor: '#8D6E63' },
+  { id: 'knights', rank: 5, teamName: 'Luigi Knights', teamCode: 'LUI', wins: 6, losses: 8, pct: '.429', gb: '6.0', streak: 'W1', runDiff: -12, logoColor: '#2ECC71' },
+  { id: 'muscles', rank: 6, teamName: 'Wario Muscles', teamCode: 'WAR', wins: 4, losses: 10, pct: '.286', gb: '8.0', streak: 'L2', runDiff: -24, logoColor: '#F1C40F' },
+];
+
+export default function StandingsTable() {
+  
+  const columns = [
+    {
+      header: "Rank",
+      className: "w-16 text-center",
+      cell: (item: TeamStanding) => (
+        <span className={cn(
+          "font-display text-lg",
+          item.rank === 1 ? "text-comets-yellow drop-shadow-[0_0_5px_rgba(244,208,63,0.8)]" : "text-white/50"
+        )}>
+          {item.rank}
+        </span>
+      )
+    },
+    {
+      header: "Team",
+      className: "min-w-[200px]",
+      cell: (item: TeamStanding) => (
+        <div className="flex items-center gap-3">
+          {/* Logo Placeholder with Glow */}
+          <div 
+            className="w-8 h-8 rounded bg-white/10 flex items-center justify-center text-xs font-bold border border-white/10 shadow-sm"
+            style={{ color: item.logoColor, borderColor: item.rank === 1 ? item.logoColor : 'rgba(255,255,255,0.1)' }}
+          >
+            {item.teamCode[0]}
+          </div>
+          <div className="flex flex-col">
+            <span className="font-bold uppercase tracking-wide text-white group-hover/row:text-comets-cyan transition-colors">
+              {item.teamName}
+            </span>
+            <span className="text-[10px] text-white/40 md:hidden">{item.teamCode}</span>
+          </div>
+        </div>
+      )
+    },
+    {
+      header: "W",
+      accessorKey: "wins",
+      className: "text-center text-white/90"
+    },
+    {
+      header: "L",
+      accessorKey: "losses",
+      className: "text-center text-white/60"
+    },
+    {
+      header: "PCT",
+      accessorKey: "pct",
+      className: "text-center font-bold text-comets-blue tracking-wider"
+    },
+    {
+      header: "GB",
+      accessorKey: "gb",
+      className: "text-center text-white/40 hidden md:table-cell"
+    },
+    {
+      header: "STRK",
+      className: "text-center",
+      cell: (item: TeamStanding) => (
+        <span className={cn(
+          "px-2 py-1 rounded text-xs font-bold border",
+          item.streak.startsWith("W") 
+            ? "bg-green-900/30 text-green-400 border-green-500/30 shadow-[0_0_5px_rgba(74,222,128,0.2)]" 
+            : "bg-red-900/30 text-red-400 border-red-500/30 shadow-[0_0_5px_rgba(248,113,113,0.2)]"
+        )}>
+          {item.streak}
+        </span>
+      )
+    },
+    {
+      header: "DIFF",
+      className: "text-center text-right hidden md:table-cell",
+      cell: (item: TeamStanding) => (
+        <span className={item.runDiff > 0 ? "text-green-400" : "text-red-400"}>
+          {item.runDiff > 0 ? `+${item.runDiff}` : item.runDiff}
+        </span>
+      )
+    }
+  ];
+
+  return (
+    <div className="w-full max-w-5xl mx-auto">
+       <RetroTable 
+          data={MOCK_STANDINGS} 
+          columns={columns} 
+          onRowClick={(item) => console.log(`Clicked ${item.teamName}`)}
+       />
+    </div>
+  );
+}

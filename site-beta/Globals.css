@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* --- The "Neon Void" Theme --- */
+  --background: #050505;
+  --foreground: #ffffff;
+  
+  --surface-dark: #0a0a0a;
+  --surface-light: #121212;
+
+  /* --- Arcade Palette --- */
+  --comets-yellow: #F4D03F;
+  --comets-red: #FF4D4D;
+  --comets-blue: #2E86DE;
+  --comets-cyan: #00F3FF;
+  --comets-purple: #BD00FF;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground font-body antialiased selection:bg-comets-cyan selection:text-black overflow-x-hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .text-stroke-1 { -webkit-text-stroke: 1px currentColor; }
+  .text-stroke-2 { -webkit-text-stroke: 2px currentColor; }
+  .text-stroke-white-20 { -webkit-text-stroke-color: rgba(255, 255, 255, 0.2); }
+
+  .scanlines {
+    background: linear-gradient(
+      to bottom,
+      rgba(255,255,255,0),
+      rgba(255,255,255,0) 50%,
+      rgba(0,0,0,0.2) 50%,
+      rgba(0,0,0,0.2)
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+  }
+  
+  .text-shadow-neon {
+    text-shadow: 0 0 10px currentColor;
+  }
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--background); }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--comets-yellow); }
