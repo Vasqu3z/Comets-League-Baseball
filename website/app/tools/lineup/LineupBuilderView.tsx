@@ -126,7 +126,14 @@ export default function LineupBuilderView({ chemistryMatrix, playerNames }: Prop
   const availablePlayers = playerNames.filter(name => !lineup.includes(name) && !battingOrder.includes(name));
 
   // Drag handlers
-  const handleDragStart = (player: string, fromPosition?: number, fromBattingOrder?: number) => {
+  const handleDragStart = (
+    event: React.DragEvent,
+    player: string,
+    fromPosition?: number,
+    fromBattingOrder?: number
+  ) => {
+    event.dataTransfer.effectAllowed = 'move';
+    event.dataTransfer.setData('text/plain', player);
     setDraggedPlayer(player);
     setDraggedFromPosition(fromPosition ?? null);
     setDraggedFromBattingOrder(fromBattingOrder ?? null);
@@ -505,7 +512,7 @@ export default function LineupBuilderView({ chemistryMatrix, playerNames }: Prop
                       {player ? (
                         <div
                           draggable
-                          onDragStart={() => handleDragStart(player, position.id)}
+                          onDragStart={event => handleDragStart(event, player, position.id)}
                           className={`
                             relative bg-space-navy/90 backdrop-blur-md rounded-lg shadow-lg px-3 py-2 cursor-move
                             border-2 transition-all hover:scale-105
@@ -559,7 +566,7 @@ export default function LineupBuilderView({ chemistryMatrix, playerNames }: Prop
                     {player ? (
                       <div
                         draggable
-                        onDragStart={() => handleDragStart(player, undefined, idx)}
+                        onDragStart={event => handleDragStart(event, player, undefined, idx)}
                         className="bg-nebula-orange/10 border-2 border-nebula-orange/50 rounded-lg px-3 py-2 cursor-move hover:bg-nebula-orange/20 transition-all duration-200"
                       >
                         <div className="flex items-center gap-2">
